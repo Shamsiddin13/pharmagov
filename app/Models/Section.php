@@ -14,6 +14,14 @@ class Section extends Model
     ];
 
     /**
+     * Get the demand letters for the section.
+     */
+    public function demandLetters(): HasMany
+    {
+        return $this->hasMany(DemandLetter::class);
+    }
+
+    /**
      * Get the warehouse records for the section.
      */
     public function warehouses(): HasMany

@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id()->primary('PK_INVOICES');
             $table->string('reference_number', 50)->unique()->nullable(false)->comment('Format: №-XXXXX');
+            $table->foreignId('polyclinic_id')->constrained('polyclinics');
             $table->date('invoice_date')->nullable(false);
             $table->decimal('total_amount', 20, 2)->nullable(false)->default(0.00);
             $table->timestamp('created_at')->useCurrent();
@@ -23,6 +24,7 @@ return new class extends Migration
             // Add indexes
             $table->index('reference_number', 'IDX_INVOICES_REF_NUMBER');
             $table->index('invoice_date', 'IDX_INVOICES_DATE');
+            $table->index('polyclinic_id', 'IDX_INVOICES_POLYCLINIC_ID');
         });
 
         // Set default timezone for timestamps to UTC+5

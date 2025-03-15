@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
@@ -10,6 +11,7 @@ class Invoice extends Model
 {
     protected $fillable = [
         'reference_number',
+        'polyclinic_id',
         'invoice_date',
         'total_amount'
     ];
@@ -18,6 +20,14 @@ class Invoice extends Model
         'invoice_date' => 'date',
         'total_amount' => 'decimal:2'
     ];
+
+    /**
+     * Get the polyclinic that owns the invoice.
+     */
+    public function polyclinic(): BelongsTo
+    {
+        return $this->belongsTo(Polyclinic::class);
+    }
 
     /**
      * Get the warehouse records for the invoice.
