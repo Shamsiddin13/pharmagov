@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('demand_letters', function (Blueprint $table) {
             $table->id()->primary('PK_DEMAND_LETTERS');
             $table->string('reference_number', 50)->unique()->nullable(false)->comment('Format: №-XXXXX');
+            $table->foreignId('section_id')->constrained('sections');
             $table->date('letter_date')->nullable(false);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
@@ -22,6 +23,7 @@ return new class extends Migration
             // Add indexes
             $table->index('reference_number', 'IDX_DEMAND_LETTERS_REF_NUMBER');
             $table->index('letter_date', 'IDX_DEMAND_LETTERS_DATE');
+            $table->index('section_id', 'IDX_DEMAND_LETTERS_SECTION_ID');
         });
 
         // Set default timezone for timestamps to UTC+5

@@ -13,7 +13,15 @@ class Polyclinic extends Model
     ];
 
     /**
-     * Get the warehouse records for the polyclinic.
+     * Get the invoices for the polyclinic.
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    /**
+     * Get the warehouses for the polyclinic.
      */
     public function warehouses(): HasMany
     {
